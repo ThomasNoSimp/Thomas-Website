@@ -14,7 +14,7 @@ function login() {
         db_button.style.display = "block";
     }
     else if(usernameInput == "" || passwordInput == "") {
-        swal("Error!", "Please enter a valid username and password");
+        alert("Please enter a valid username and password.")
     }
 }
 
