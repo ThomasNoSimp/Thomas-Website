@@ -1,0 +1,19 @@
+form{
+    border:1px solid black;
+    border-radius:10%;
+    height:80vh;
+    background-color:azure;
+}
+
+p{
+    color:black;
+}
+
+#db_button{
+    display:none;
+}
+
+#db_button a{
+    text-decoration:none;
+    color:white;
+}
