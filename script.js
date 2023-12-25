@@ -23,3 +23,9 @@ window.onload = function() {
             .catch(error => console.error('Error fetching geocoding data:', error));
     });
 }
+function onClick(e) {
+    e.preventDefault();
+    grecaptcha.enterprise.ready(async () => {
+      const token = await grecaptcha.enterprise.execute('6LeCoDspAAAAAHgA8KjfZAVKjO4-degaquezi7id', {action: 'LOGIN'});
+    });
+  }
