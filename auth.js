@@ -9,8 +9,7 @@ function login() {
 
     if (username.includes(usernameInput) && password.includes(passwordInput)) {
         alert("Login successful!")
-        const db_button = doc
-        ument.getElementById("db_button");
+        const db_button = document.getElementById("db_button");
         db_button.style.display = "block";
     }
     else if(usernameInput == "" || passwordInput == "") {
