@@ -1,4 +1,3 @@
-const swal = require('sweetalert');
 // Add more username and passwords here
 const username = ["Thomas", "May",];
 const password = ["thomas28@", "may12345@"];
