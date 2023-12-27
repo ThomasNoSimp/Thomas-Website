@@ -6,7 +6,10 @@ from app.forms import RegistrationForm, LoginForm
 
 # Your user model and database integration would go here
 # For simplicity, we'll use an in-memory list to store user data.
-users = []
+users = [
+    {'username': 'Thomas', 'password': 'thomas28@'},
+    {'username': 'user2', 'password': 'password2'},
+]
 
 
 @app.route('/')
