@@ -1,0 +1,11 @@
+<!-- app/templates/index.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Welcome to the Original Page</h2>
+    
+    <!-- Add a link to the Login page -->
+    <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+    
+    <!-- Other content for the original page goes here -->
+{% endblock %}
