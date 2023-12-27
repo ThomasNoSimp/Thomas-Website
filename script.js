@@ -13,7 +13,7 @@ window.onload = function() {
     
                 // Check if the country is Thailand
                 if (country === 'Thailand') {
-                    alert('Not available in Myanmar');
+                    alert('Not available in Thailand');
                     var allElements = document.querySelectorAll('*');
                     allElements.forEach(function(element) {
                         element.style.display = 'none';
