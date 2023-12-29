@@ -8,6 +8,7 @@ function login() {
 
     if (username.includes(usernameInput) && password.includes(passwordInput)) {
         alert("Login successful!")
+        localStorage.setItem("loggedInUser", usernameInput);
         const db_button = document.getElementById("db_button");
         db_button.style.display = "block";
     }

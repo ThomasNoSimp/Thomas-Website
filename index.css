@@ -10,3 +10,16 @@
 .profile-btn:hover{
     background-color: #555;
 }
+
+.settings-btn{
+    display:inline-block;
+    font-size:24px;
+    padding:20px 30px;
+    transition:background-color 0.3s ease-in-out;
+    text-decoration: none;
+    color:#fff;
+}
+
+.profile-btn:hover{
+    background-color:#555;
+}
