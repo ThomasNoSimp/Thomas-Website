@@ -28,4 +28,4 @@ function onClick(e) {
     grecaptcha.enterprise.ready(async () => {
       const token = await grecaptcha.enterprise.execute('6LeCoDspAAAAAHgA8KjfZAVKjO4-degaquezi7id', {action: 'LOGIN'});
     });
-}
+} 
