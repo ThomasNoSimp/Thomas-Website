@@ -1,6 +1,6 @@
 // Add more username and passwords here
-const username = ["Thomas", "May", "it is what it is", "Obnoxious234"];
-const password = ["thomas28@", "may12345@", "14152400", "hwpdrjc123()"];
+const username = ["Thomas", "May", "it is what it is", "Obnoxious234", "T1n4"];
+const password = ["thomas28@", "may12345@", "14152400", "hwpdrjc123()", "123456"];
 
 function login() {
     const usernameInput = document.getElementById("username").value;
