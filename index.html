@@ -28,7 +28,7 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
     </script>
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VESQG7L9TL"></script>
     <script>
@@ -37,6 +37,36 @@
     gtag('js', new Date());
 
     gtag('config', 'G-VESQG7L9TL');
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+    function getRealTimeData(apiKey, viewId) {
+        $.ajax({
+        url: `https://www.googleapis.com/analytics/v3/data/realtime?ids=ga:${viewId}&metrics=rt:activeUsers&key=${apiKey}`,
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            const activeUsers = data.totalResults ? data.rows[0][0] : 0;
+            // Display the active user count wherever you want on your page
+            document.getElementById('activeUsers').innerText = activeUsers;
+        },
+        error: function () {
+            console.error('Failed to fetch real-time data');
+        }
+        });
+    }
+
+    // Call the function with your API key and Google Analytics view ID
+    const apiKey = 'AIzaSyC03uRXlNyRFELwIHz-6LiciIzbycCPv7M';
+    const viewId = '';
+    getRealTimeData(apiKey, viewId);
+
+    // Update every minute (optional)
+    setInterval(function () {
+        getRealTimeData(apiKey, viewId);
+    }, 60000);
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="index.css">
