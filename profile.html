@@ -4,17 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-    <title id="pageTitle">Profile | Page Title</title>
-    <script>
-        const loggedInUser = localStorage.getItem("loggedInUser");
-        document.getElementById("pageTitle").innerText = `Profile | ${loggedInUser}`
-
-        if(loggedInUser == null){
-            window.onload(location.href="login.html");
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <title id="pageTitle"></title>
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background color */
+            margin:0;
         }
-    </script>
+
+        html{
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            border: 2px solid linear-gradient(45deg, #3498db, #e74c3c);
+            border-radius: 15px; /* Border radius for rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+            width:1000px;
+            margin-top:-350px;
+        }
+
+        .card-title {
+            color: black; /* Text color */
+            float: inline-start;
+        }
+
+        #profile_picture {
+            float:inline-start;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <img src="profile_picture.png" class="img-fluid rounded-circle" alt="Profile Picture" width="100" id="profile_picture">
+                        <h5 class="card-title mt-4" id="username"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script defer>
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    const pageTitle = document.getElementById("pageTitle");
+    const usernameElement = document.getElementById("username");
+
+    if (loggedInUser === null) {
+        window.location.href = "login.html";
+    } else {
+        pageTitle.innerText = `Profile | ${loggedInUser}`;
+        usernameElement.innerHTML = loggedInUser;
+    }
+</script>
 </html>
