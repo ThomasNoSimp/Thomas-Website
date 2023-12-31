@@ -71,5 +71,15 @@
             window.onload(location.href="login.html");
         }
     </script>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeSwitcher = document.querySelector('#theme-switcher');
+
+            themeSwitcher.addEventListener('click', function () {
+                document.body.classList.toggle('dark-theme');
+            });
+        });
+
+    </script>
 </body>
 </html>

@@ -36,3 +36,15 @@
 .logout-btn:hover{
     background-color:#555;
 }
+
+/* Light theme styles */
+body {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* Dark theme styles */
+body.dark-theme {
+    background-color: #333333;
+    color: #ffffff;
+}
