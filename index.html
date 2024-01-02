@@ -130,6 +130,11 @@
             });
         });
 
+        function logout() {
+            loggedInUser = null;
+            localStorage.removeItem("loggedInUser");
+            window.onload(location.href="login.html");
+        }
     </script>
 </body>
 </html>
