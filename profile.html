@@ -104,18 +104,14 @@
             usernameElement.innerHTML = loggedInUser;
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const themeSwitcher = document.querySelector('#theme-switcher');
-
-            themeSwitcher.addEventListener('click', function () {
-                document.body.classList.toggle('dark-theme');
-            });
-
-            const storedProfilePicture = localStorage.getItem('profilePicture');
-            if (storedProfilePicture) {
-                profilePictureElement.src = storedProfilePicture;
-            }
+        themeSwitcher.addEventListener('click', function () {
+            document.body.classList.toggle('dark-theme');
         });
+
+        const storedProfilePicture = localStorage.getItem(`profilePicture_${loggedInUser}`);
+        if (storedProfilePicture) {
+            profilePictureElement.src = storedProfilePicture;
+        }
 
         changePictureInput.addEventListener('change', function (event) {
             const file = event.target.files[0];
