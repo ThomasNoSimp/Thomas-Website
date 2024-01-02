@@ -115,32 +115,33 @@
             document.body.classList.toggle('dark-theme');
         });
 
-        const openDB = indexedDB.open('ProfilePicturesDB', 1);
+        const storedProfilePicture = localStorage.getItem(`profilePicture_${loggedInUser}`);
+        
+        if (storedProfilePicture) {
+            profilePictureElement.src = storedProfilePicture;
+        }
 
-        openDB.onupgradeneeded = function (event) {
-            const db = event.target.result;
-            db.createObjectStore('profilePictures', { keyPath: 'user' });
-        };
+        changePictureInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
 
-        openDB.onsuccess = function (event) {
-            const db = event.target.result;
-            const tx = db.transaction('profilePictures', 'readonly');
-            const store = tx.objectStore('profilePictures');
-            
-            const request = store.get(loggedInUser);
+            if (file) {
+                const reader = new FileReader();
 
-            request.onsuccess = function (event) {
-                const storedProfilePicture = event.target.result;
+                reader.onload = function (e) {
+                    const profilePictureSrc = e.target.result;
+                    localStorage.setItem(`profilePicture_${loggedInUser}`, profilePictureSrc);
 
-                if (storedProfilePicture) {
-                    profilePictureElement.src = storedProfilePicture.picture;
-                }
-            };
-        };
+                    profilePictureElement.src = profilePictureSrc;
+                };
 
-        openDB.onerror = function (event) {
-            console.error("Error opening IndexedDB:", event.target.errorCode);
-        };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        profilePictureElement.addEventListener('click', function () {
+            changePictureInput.click();
+        });
     });
 </script>
 </html>
