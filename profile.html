@@ -60,6 +60,10 @@
 
         #profile_picture {
             float:inline-start;
+            cursor:pointer;
+        }
+        #change_picture_input{
+            display:none;
         }
     </style>
 </head>
@@ -70,10 +74,9 @@
             <div class="col-md-8 mx-auto">
                 <div class="card text-center">
                     <div class="card-body">
-                        <label for="change_picture_input" style="cursor: pointer;">
-                            <img src="profile_picture.png" class="img-fluid rounded-circle" alt="Profile Picture" width="100" id="profile_picture">
-                        </label>
-                        <h5 class="card-title mt-4" id="username"></h5>
+                        <img src="profile_picture.png" class="img-fluid rounded-circle" alt="Profile Picture" width="100" id="profile_picture">                        
+                        <input type="file" id="change_picture_input" accept="image/*" style="display: none">
+                        <h5 class="card-title mt-4 ms-3" id="username"></h5>
                     </div>
                 </div>
             </div>
@@ -81,9 +84,14 @@
     </div>
 </body>
 <script defer>
+    const themeSwitcher = document.querySelector('#theme-switcher');
+    const body = document.body;
     const loggedInUser = localStorage.getItem("loggedInUser");
     const pageTitle = document.getElementById("pageTitle");
     const usernameElement = document.getElementById("username");
+    const profilePictureElement = document.getElementById("profile_picture");
+    const changePictureInput = document.getElementById("change_picture_input");
+    const profilePicture = document.getElementById('profile_picture');
 
     if (loggedInUser === null) {
         window.location.href = "login.html";
@@ -98,6 +106,33 @@
         themeSwitcher.addEventListener('click', function () {
             document.body.classList.toggle('dark-theme');
         });
+
+        const storedProfilePicture = localStorage.getItem('profilePicture');
+        if (storedProfilePicture) {
+            profilePictureElement.src = storedProfilePicture;
+        }
+    });
+
+    changePictureInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                profilePictureSrc = e.target.result;
+                localStorage.setItem('profilePicture', profilePictureSrc);
+
+                profilePictureElement.src = profilePictureSrc;
+            };
+
+
+            reader.readAsDataURL(file);
+        }
+    });
+
+    profilePictureElement.addEventListener('click', function () {
+        changePictureInput.click();
     });
 </script>
 </html>
