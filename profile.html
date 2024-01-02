@@ -66,7 +66,7 @@
         #change_picture_input{
             display:none;
         }
-        
+
         .bi-arrow-left{
             font-size:2rem;
         }
@@ -116,6 +116,8 @@
         });
 
         const storedProfilePicture = localStorage.getItem(`profilePicture_${loggedInUser}`);
+        console.log("storedProfilePicture: ", storedProfilePicture);
+
         if (storedProfilePicture) {
             profilePictureElement.src = storedProfilePicture;
         }
