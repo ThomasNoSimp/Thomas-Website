@@ -124,7 +124,7 @@
                 const reader = new FileReader();
 
                 reader.onload = function (e) {
-                    profilePictureSrc = e.target.result;
+                    const profilePictureSrc = e.target.result;
                     localStorage.setItem(`profilePicture_${loggedInUser}`, profilePictureSrc);
 
                     profilePictureElement.src = profilePictureSrc;
