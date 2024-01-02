@@ -74,6 +74,9 @@
             <div class="col-md-8 mx-auto">
                 <div class="card text-center">
                     <div class="card-body">
+                        <a href="index.html" class="btn btn-white arrow-btn">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
                         <img src="profile_picture.png" class="img-fluid rounded-circle" alt="Profile Picture" width="100" id="profile_picture">                        
                         <input type="file" id="change_picture_input" accept="image/*" style="display: none">
                         <h5 class="card-title mt-4 ms-3" id="username"></h5>
@@ -121,7 +124,7 @@
 
             reader.onload = function (e) {
                 profilePictureSrc = e.target.result;
-                localStorage.setItem('profilePicture', profilePictureSrc);
+                localStorage.setItem(`profilePicture_${loggedInUser}`, profilePictureSrc);
 
                 profilePictureElement.src = profilePictureSrc;
             };
