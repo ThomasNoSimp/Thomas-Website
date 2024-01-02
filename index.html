@@ -99,7 +99,7 @@
             </div>
             <div class="col-md-4">
                 <div class="box-settings mt-5 text-center">
-                    <a href="login.html" class="btn btn-secondary logout-btn">
+                    <a href="login.html" onclick="logout()" class="btn btn-secondary logout-btn">
                         <i class="bi bi-box-arrow-right"></i>
                         Log Out
                     </a>
@@ -131,9 +131,9 @@
         });
 
         function logout() {
-            loggedInUser = null;
+            let loggedInUser = null;
             localStorage.removeItem("loggedInUser");
-            window.onload(location.href="login.html");
+            window.location.href="login.html";
         }
     </script>
 </body>
