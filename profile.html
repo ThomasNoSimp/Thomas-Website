@@ -87,55 +87,57 @@
     </div>
 </body>
 <script defer>
-    const themeSwitcher = document.querySelector('#theme-switcher');
-    const body = document.body;
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    const pageTitle = document.getElementById("pageTitle");
-    const usernameElement = document.getElementById("username");
-    const profilePictureElement = document.getElementById("profile_picture");
-    const changePictureInput = document.getElementById("change_picture_input");
-    const profilePicture = document.getElementById('profile_picture');
-
-    if (loggedInUser === null) {
-        window.location.href = "login.html";
-    } else {
-        pageTitle.innerText = `Profile | ${loggedInUser}`;
-        usernameElement.innerHTML = loggedInUser;
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
         const themeSwitcher = document.querySelector('#theme-switcher');
+        const body = document.body;
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        const pageTitle = document.getElementById("pageTitle");
+        const usernameElement = document.getElementById("username");
+        const profilePictureElement = document.getElementById("profile_picture");
+        const changePictureInput = document.getElementById("change_picture_input");
+        const profilePicture = document.getElementById('profile_picture');
 
-        themeSwitcher.addEventListener('click', function () {
-            document.body.classList.toggle('dark-theme');
+        if (loggedInUser === null) {
+            window.location.href = "login.html";
+        } else {
+            pageTitle.innerText = `Profile | ${loggedInUser}`;
+            usernameElement.innerHTML = loggedInUser;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeSwitcher = document.querySelector('#theme-switcher');
+
+            themeSwitcher.addEventListener('click', function () {
+                document.body.classList.toggle('dark-theme');
+            });
+
+            const storedProfilePicture = localStorage.getItem('profilePicture');
+            if (storedProfilePicture) {
+                profilePictureElement.src = storedProfilePicture;
+            }
         });
 
-        const storedProfilePicture = localStorage.getItem('profilePicture');
-        if (storedProfilePicture) {
-            profilePictureElement.src = storedProfilePicture;
-        }
-    });
+        changePictureInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
 
-    changePictureInput.addEventListener('change', function (event) {
-        const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
 
-        if (file) {
-            const reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePictureSrc = e.target.result;
+                    localStorage.setItem(`profilePicture_${loggedInUser}`, profilePictureSrc);
 
-            reader.onload = function (e) {
-                profilePictureSrc = e.target.result;
-                localStorage.setItem(`profilePicture_${loggedInUser}`, profilePictureSrc);
-
-                profilePictureElement.src = profilePictureSrc;
-            };
+                    profilePictureElement.src = profilePictureSrc;
+                };
 
 
-            reader.readAsDataURL(file);
-        }
-    });
+                reader.readAsDataURL(file);
+            }
+        });
 
-    profilePictureElement.addEventListener('click', function () {
-        changePictureInput.click();
+        profilePictureElement.addEventListener('click', function () {
+            changePictureInput.click();
+        });
     });
 </script>
 </html>
