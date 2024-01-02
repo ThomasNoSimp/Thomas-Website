@@ -9,13 +9,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <title id="pageTitle"></title>
     <style>
-        *{
-            user-select: none;
+        .card{
+            user-select:none;
         }
 
         body {
-            background-color: #f8f9fa; /* Light gray background color */
+            background-color: #ffffff; /* Light gray background color */
+            color:#333333;
             margin:0;
+            transition:background-color 0.5s, color 0.5s;
+        }
+        
+        body.dark-theme {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .theme-switcher {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 2.5rem;
         }
 
         html{
@@ -49,6 +64,7 @@
     </style>
 </head>
 <body>
+    <div class="theme-switcher" id="theme-switcher">🌙</div>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 mx-auto">
@@ -73,5 +89,13 @@
         pageTitle.innerText = `Profile | ${loggedInUser}`;
         usernameElement.innerHTML = loggedInUser;
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const themeSwitcher = document.querySelector('#theme-switcher');
+
+        themeSwitcher.addEventListener('click', function () {
+            document.body.classList.toggle('dark-theme');
+        });
+    });
 </script>
 </html>
