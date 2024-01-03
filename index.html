@@ -73,6 +73,7 @@
     <link rel="icon" href="favicon.png" type="x-image">
     <title id="pageTitle">Dashboard | Page Title</title>
     <script>
+        const GoogleUser = localStorage.getItem("GoogleUser");
         const loggedInUser = localStorage.getItem("loggedInUser");
         document.getElementById("pageTitle").innerText = `Dashboard | ${loggedInUser}`
     </script>
@@ -117,7 +118,7 @@
         </div>
     </div>
     <script>
-        if(loggedInUser == null){
+        if(loggedInUser || GoogleUser == null){
             window.onload(location.href="login.html");
         }
     </script>

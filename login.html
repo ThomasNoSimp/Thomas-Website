@@ -58,53 +58,6 @@
             </div>
         </div>
     </div>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyAvZW7wzTE8MpOkCDzyPYNoJpxc3H5YhZI",
-            authDomain: "thomas-website-4bb58.firebaseapp.com",
-            projectId: "thomas-website-4bb58",
-            storageBucket: "thomas-website-4bb58.appspot.com",
-            messagingSenderId: "746030468116",
-            appId: "1:746030468116:web:dd51592d5d56b76a7e2b01",
-            measurementId: "G-5KR538JLHS"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth();
-
-        // Function to handle Google sign-in
-        function signInWithGoogle() {
-            const provider = new GoogleAuthProvider();
-
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    // This gives you a Google Access Token.
-                    const credential = GoogleAuthProvider.credentialFromResult(result);
-                    const token = credential.accessToken;
-
-                    // The signed-in user info.
-                    const user = result.user;
-                    console.log("User signed in with Google:", user);
-                    window.location.href = "index.html";
-                })
-                .catch((error) => {
-                    // Handle errors here
-                    console.error("Google Sign-In Error:", error);
-                });
-        }
-
-        // Add event listener for Google Sign-In button click
-        document.getElementById("googleSignInButton").addEventListener("click", signInWithGoogle);
-    </script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
