@@ -31,9 +31,10 @@ function signInWithGoogle() {
 
             // The signed-in user info.
             const user = result.user;
+            const displayName = user.displayName
             console.log("User signed in with Google:", user);
             window.location.href = "index.html";
-            localStorage.setItem("GoogleUser", user);
+            localStorage.setItem("GoogleUser", displayName);
         })
         .catch((error) => {
             // Handle errors here
