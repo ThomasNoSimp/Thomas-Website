@@ -62,9 +62,6 @@ function login() {
         alert("Please enter a valid username and password.")
     }
 
-    else if(user) {
-
-    }
 }
 
 document.getElementById("loginButton").addEventListener("click", login);
