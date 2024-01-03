@@ -118,7 +118,10 @@
         </div>
     </div>
     <script>
-        if(loggedInUser || GoogleUser == null){
+        if(loggedInUser == null) {
+            window.onload(location.href="login.html");
+        }
+        else if(GoogleUser == null) {
             window.onload(location.href="login.html");
         }
     </script>
