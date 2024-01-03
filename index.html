@@ -121,7 +121,8 @@
         if(loggedInUser == null) {
             window.onload(location.href="login.html");
         }
-        else if(GoogleUser == null) {
+        
+        if(localStorage.getItem("GoogleUser" == null)) {
             window.onload(location.href="login.html");
         }
     </script>
