@@ -121,7 +121,30 @@
             
             localStorage.setItem("username", usernameInput);
             localStorage.setItem("password", passwordInput);
-            alert("Successfully Signed Up!")
+            alert("Successfully Signed Up!");
+            clearForm("signupForm");
+        }
+
+        function clearForm(formId) {
+            const form = document.getElementById("signupForm");
+
+            // Check if the form exists
+            if (form) {
+                // Iterate over the form elements
+                Array.from(form.elements).forEach(element => {
+                    // Check if the element is an input, textarea, or select
+                    if (
+                        element.tagName === "INPUT" ||
+                        element.tagName === "TEXTAREA" ||
+                        element.tagName === "SELECT"
+                    ) {
+                        // Clear the value
+                        element.value = "";
+                    }
+                });
+            } else {
+                console.error("Form not found with ID:", formId);
+            }
         }
     </script>
 </body>
