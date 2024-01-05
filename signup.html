@@ -78,6 +78,28 @@
             const usernameInput = document.getElementById("username").value;
             const passwordInput = document.getElementById("password").value;
 
+            if(passwordInput.length < 8) {
+                alert("Password must be at least 8 characters long!");
+                return false;
+            }
+
+            else if(hasSpecialCharacter(passwordInput)) {
+                alert("Password cannot contain any special characters.");
+                return false;
+            }
+
+            function hasSpecialCharacter(input) {
+                const specialCharacters = ['!', ' ', '$', '%', '^', '&', '*', '(', ')'];
+                
+                for (const char of input) {
+                    if (specialCharacters.includes(char)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
             console.log("Username:", usernameInput);
             console.log("Password:", passwordInput);
             
