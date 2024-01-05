@@ -78,6 +78,22 @@
             const usernameInput = document.getElementById("username").value;
             const passwordInput = document.getElementById("password").value;
 
+            const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check if the username is already taken
+            if (existingUsers.some(user => user.username === usernameInput)) {
+                alert("Username is already taken. Please choose a different one.");
+                return;
+            }
+
+            // Add the new user to the array
+            existingUsers.push({ username: usernameInput, password: passwordInput });
+
+            // Store the updated array in local storage
+            localStorage.setItem("users", JSON.stringify(existingUsers));
+
+            alert("Successfully Signed Up!");
+
             if(passwordInput.length < 8) {
                 alert("Password must be at least 8 characters long!");
                 return false;
