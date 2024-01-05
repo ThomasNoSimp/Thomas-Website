@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
   });
 
 const corsOptions = {
-    origin: 'http://yourfrontenddomain.com',
+    origin: 'https://thomas-website.netlify.app',
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 // Endpoint for user registration
