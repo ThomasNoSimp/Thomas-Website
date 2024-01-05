@@ -76,6 +76,8 @@
     <script defer>
         document.getElementById("signupButton").addEventListener("click", signUp);
 
+        document.getElementById("signupButton").addEventListener("click", signUp);
+
         function signUp() {
             const usernameInput = document.getElementById("username").value;
             const passwordInput = document.getElementById("password").value;
@@ -97,7 +99,8 @@
                 alert(data.message);
 
                 if (data.message === 'User registered successfully') {
-                    clearForm("signupForm");
+                    // Redirect or perform other actions for successful signup
+                    window.location.href = '/login.html'; // Change the URL accordingly
                 }
             })
             .catch(error => {

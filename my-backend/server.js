@@ -1,37 +1,35 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { MongoClient } = require('mongodb');
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
 
-// Enable CORS for all routes
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // Allow specific HTTP methods
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow specific headers
-  
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-      return res.sendStatus(200);
-    }
-  
-    next();
-  });
+const url = process.env.MONGODB_URI;
+const dbName = process.env.MONGODB_DB_NAME;
+let db;
 
-const users = [];
-
-// GET route for the root endpoint
-app.get('/', (req, res) => {
-  res.send('Hello, welcome to the authentication server!');
+MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+  if (err) {
+    console.error('Error connecting to MongoDB:', err);
+    return;
+  }
+  console.log('Connected to MongoDB');
+  db = client.db(dbName);
 });
 
+// Endpoint for user registration
 app.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    users.push({ username, password: hashedPassword });
+    await db.collection('users').insertOne({ username, password: hashedPassword });
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error(error);
@@ -39,14 +37,15 @@ app.post('/register', async (req, res) => {
   }
 });
 
+// Endpoint for user login
 app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = users.find((u) => u.username === username);
+    const user = await db.collection('users').findOne({ username });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      const token = jwt.sign({ username }, process.env.JWT_SECRET || 'd7e11f8b421c37aefa375762010db867a3e681d97e9802733d4928535c9d391f', {
-        expiresIn: '1h',
+      const token = jwt.sign({ username }, '789c36f1e1c25d2227ab15ceb3154235a18ca8c391e82e48f8c0cd8d7fa4c9bd', {
+        expiresIn: '1h', // Set expiration time
       });
       res.json({ token });
     } else {
@@ -58,7 +57,6 @@ app.post('/login', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
