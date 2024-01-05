@@ -16,7 +16,7 @@
             <div class="col-md-8 mx-auto mt-5">
                 <form id="loginForm" class="form">
                     <h2 class="text-center mt-3">Log in</h2>
-                    
+
                     <div class="row">
                         <div class="mb-3 col-md-6 mt-5 mx-auto">
                             <label for="username" class="form-label">Enter your username:</label><br>
@@ -58,5 +58,42 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="script.js"></script>
     <script type="module" src="auth.js"></script>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Make a POST request to your server
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server
+                console.log(data);
+
+                if (data.token) {
+                    // Store the token securely, e.g., in localStorage
+                    localStorage.setItem('token', data.token);
+
+                    // Redirect to a dashboard page or perform other actions
+                    window.location.href = 'index.html';
+                } else {
+                    // Handle unsuccessful login, show an alert, etc.
+                    alert('Invalid username or password');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error, show an alert, etc.
+            });
+        }
+
+    </script>
 </body>
 </html>

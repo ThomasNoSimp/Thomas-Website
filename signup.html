@@ -74,55 +74,36 @@
         </div>
     </div>
     <script defer>
+        document.getElementById("signupButton").addEventListener("click", signUp);
+
         function signUp() {
             const usernameInput = document.getElementById("username").value;
             const passwordInput = document.getElementById("password").value;
 
-            const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+            // Make a POST request to your server
+            fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: usernameInput, password: passwordInput }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server
+                console.log(data);
 
-            // Check if the username is already taken
-            if (existingUsers.some(user => user.username === usernameInput)) {
-                alert("Username is already taken. Please choose a different one.");
-                return;
-            }
+                // Show an alert or perform other actions based on the server response
+                alert(data.message);
 
-            // Add the new user to the array
-            existingUsers.push({ username: usernameInput, password: passwordInput });
-
-            // Store the updated array in local storage
-            localStorage.setItem("users", JSON.stringify(existingUsers));
-
-            alert("Successfully Signed Up!");
-
-            if(passwordInput.length < 8) {
-                alert("Password must be at least 8 characters long!");
-                return false;
-            }
-
-            else if(hasSpecialCharacter(passwordInput)) {
-                alert("Password cannot contain any special characters.");
-                return false;
-            }
-
-            function hasSpecialCharacter(input) {
-                const specialCharacters = ['!', ' ', '$', '%', '^', '&', '*', '(', ')'];
-                
-                for (const char of input) {
-                    if (specialCharacters.includes(char)) {
-                        return true;
-                    }
+                if (data.message === 'User registered successfully') {
+                    clearForm("signupForm");
                 }
-
-                return false;
-            }
-
-            console.log("Username:", usernameInput);
-            console.log("Password:", passwordInput);
-            
-            localStorage.setItem("username", usernameInput);
-            localStorage.setItem("password", passwordInput);
-            alert("Successfully Signed Up!");
-            clearForm("signupForm");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error, show an alert, etc.
+            });
         }
 
         function clearForm(formId) {

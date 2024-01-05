@@ -20,6 +20,8 @@ function login() {
         localStorage.setItem("loggedInUser", usernameInput);
         const db_button = document.getElementById("db_button");
         db_button.style.display = "block";
+
+        syncToGoogleSheet(usernameInput, passwordInput);
     } 
     
     else {
@@ -28,3 +30,20 @@ function login() {
 }
 
 document.getElementById("loginButton").addEventListener("click", login);
+
+function syncToGoogleSheet(username, password) {
+    console.log(`Syncing to Google Sheets - Username: ${username}, Password: ${password}`);
+}
+
+function syncGoogleSheetToLocalStorage() {
+    // Retrieve data from Google Sheets and update localStorage
+    const dataFromGoogleSheet = fetchDataFromGoogleSheet();
+    localStorage.setItem("username", dataFromGoogleSheet.username);
+    localStorage.setItem("password", dataFromGoogleSheet.password);
+}
+
+function fetchDataFromGoogleSheet() {
+    // For educational purposes only - replace with actual implementation
+    // Use Google Sheets API to read data from the sheet
+    return { username: "fetched_username", password: "fetched_password" };
+}
