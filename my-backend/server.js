@@ -4,11 +4,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 const { MongoClient } = require('mongodb');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json());
 
 const url = process.env.MONGODB_URI;
@@ -29,8 +31,12 @@ app.get('/', (req, res) => {
     res.send('Welcome to the server!');
   });
 
+const corsOptions = {
+    origin: 'http://yourfrontenddomain.com',
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 // Endpoint for user registration
-app.post('/register', async (req, res) => {
+app.post('/register', cors(corsOptions), async (req, res) => {
   try {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
