@@ -24,6 +24,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
   db = client.db(dbName);
 });
 
+// Root route
+app.get('/', (req, res) => {
+    res.send('Welcome to the server!');
+  });
+
 // Endpoint for user registration
 app.post('/register', async (req, res) => {
   try {
