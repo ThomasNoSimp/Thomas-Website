@@ -38,6 +38,12 @@
     </style>
 </head>
 <body>
+    <!--Display if user did not enable JS in browser settings-->
+    <noscript>
+        <pre>Please enable JavaScript in your browser settings.</pre>
+    </noscript>
+    <!--End of Display-->
+    <!--Start main process-->
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto mt-5">
@@ -73,6 +79,8 @@
             </div>
         </div>
     </div>
+    <!--Eng main process-->
+    <!--Script ( Deferred )-->
     <script defer>
         document.getElementById("signupButton").addEventListener("click", signUp);
 
@@ -106,7 +114,9 @@
                 // Handle error, show an alert, etc.
             });
         }
+        //If sign up is failed, then return
 
+        //Clear the form values after signup sucess
         function clearForm(formId) {
             const form = document.getElementById("signupForm");
 
